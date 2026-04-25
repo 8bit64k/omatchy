@@ -236,14 +236,20 @@ async def omatchy_status():
     If Omarchy is not installed or no theme is active, returns a fallback
     dark theme so the dashboard stays usable.
     """
+    home = _get_home()
+    name_file = home / ".config/omarchy/current/theme.name"
+    is_installed = name_file.exists()
+
     theme_name, colors = get_current_omarchy_theme()
     font = get_current_font()
 
     if colors is None:
-        # Omarchy not installed or theme not found — return a safe fallback
+        # Theme colors not found (e.g. custom theme without colors.toml)
+        # but Omarchy may still be installed. Return a safe fallback palette.
         return {
             "omarchyTheme": theme_name,
-            "installed": False,
+            "installed": is_installed,
+            "fallback": True,
             "palette": {
                 "background": {"hex": "#0a0a0a", "alpha": 1.0},
                 "midground": {"hex": "#888888", "alpha": 1.0},
@@ -273,7 +279,8 @@ async def omatchy_status():
         }
 
     result = map_omarchy_to_hermes(colors, font, theme_name)
-    result["installed"] = True
+    result["installed"] = is_installed
+    result["fallback"] = False
     return result
 
 

@@ -166,13 +166,16 @@
 
     const themeLabel = status ? status.omarchyTheme : "…";
     const installed = status ? status.installed : false;
+    const fallback = status ? status.fallback : false;
     const pretty = prettyTheme(themeLabel);
 
     const tooltip = error
       ? "Omatchy: " + error
-      : installed
-        ? "Omatchy bridge active — " + pretty
-        : "Omatchy: Omarchy not detected";
+      : !installed
+        ? "Omatchy: Omarchy not detected"
+        : fallback
+          ? "Omatchy bridge active — " + pretty + " (fallback colors)"
+          : "Omatchy bridge active — " + pretty;
 
     // Neutral inline-flex peer: let the parent's `items-center` and `gap-2`
     // handle alignment.  We match the ThemeSwitcher button height (1.5rem)
