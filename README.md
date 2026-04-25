@@ -11,11 +11,9 @@ Built for the **Nous Research Hermes Dashboard Pop-Up Hackathon** to showcase bo
 ## Demo
 
 <!-- Replace with your actual video link -->
-[![Omatchy Demo](assets/demo-thumb.png)](https://youtu.be/REPLACE_ME)
+[![Omatchy Demo](assets/title-card.png)](https://youtu.be/REPLACE_ME)
 
-> **The pitch:** Widescreen Linux desktop. Six apps. One theme. Change it in Omarchy — watch every window (including Hermes Dashboard) shift in real-time. That's Omatchy.
-
-See [`assets/storyboard.md`](assets/storyboard.md) for the full shot list and [`assets/record-demo.sh`](assets/record-demo.sh) for a one-command screen recorder.
+> 🎬 **Demo video coming soon.** See [`assets/storyboard.md`](assets/storyboard.md) for the shot list and [`assets/record-demo.sh`](assets/record-demo.sh) if you want to record your own.
 
 ---
 
@@ -39,21 +37,16 @@ See [`assets/storyboard.md`](assets/storyboard.md) for the full shot list and [`
 git clone https://github.com/8bit64k/omatchy.git
 cd omatchy
 
-# 2. Install theme
-cp theme/omatchy.yaml ~/.hermes/dashboard-themes/
+# 2. Run the installer
+./install.sh
 
-# 3. Install plugin
-mkdir -p ~/.hermes/plugins/omatchy/dashboard
-cp plugin/manifest.json plugin/plugin_api.py ~/.hermes/plugins/omatchy/dashboard/
-cp plugin/dist/index.js ~/.hermes/plugins/omatchy/dashboard/dist/
-
-# 4. Restart Hermes dashboard
+# 3. Restart Hermes dashboard
 hermes dashboard
 
-# 5. Select "Omatchy" from the theme picker (top-right)
+# 4. Select "Omatchy" from the theme picker (top-right)
 ```
 
-> **Note:** Because the dashboard caches plugin API routes at startup, a restart is required after first install. This affects all plugins.
+> **Note:** Because the dashboard caches plugin API routes at startup, a restart is required after first install. This affects all plugins. If you are running Hermes in a profile directory, `HERMES_HOME` is detected automatically.
 
 ---
 
@@ -158,6 +151,7 @@ GET /api/plugins/omatchy/status
 {
   "omarchyTheme": "catppuccin-dark",
   "installed": true,
+  "fallback": false,
   "palette": {
     "background": {"hex": "#1e1e2e", "alpha": 1.0},
     "midground": {"hex": "#f5e0dc", "alpha": 1.0},
@@ -190,7 +184,7 @@ GET /api/plugins/omatchy/status
 }
 ```
 
-If Omarchy is not installed, `installed: false` and a safe fallback theme is returned so the dashboard never breaks.
+If Omarchy is not installed, `installed: false` and a safe fallback theme is returned so the dashboard never breaks. If Omarchy is installed but the current theme has no parsable color data (e.g. `azure-glow`), `fallback: true` and the badge tooltip notes this.
 
 ---
 
@@ -217,12 +211,14 @@ This has three advantages:
 
 The tradeoff: the theme picker still shows "Omatchy" as the active theme (the base theme), but the visual appearance is overridden by the plugin. If the plugin is disabled, the base theme remains as a safe neutral dark fallback.
 
+If you switch to a different dashboard theme (e.g. the default), Omatchy idles — it stops injecting CSS and hides its notifications so it never interferes with other themes.
+
 ---
 
-## Why This Wins
+## Why This Exists
 
-| Hackathon Criteria | How Omatchy Delivers |
-|--------------------|----------------------|
+| Criteria | How Omatchy Fits |
+|----------|------------------|
 | **Custom Theme** | `omatchy.yaml` — a real, installable Hermes dashboard theme |
 | **Dashboard Plugin** | Hidden slot-only plugin with backend API + frontend polling |
 | **Useful** | If you use Omarchy + Hermes, this eliminates theme drift between desktop and dashboard |
@@ -233,33 +229,11 @@ The tradeoff: the theme picker still shows "Omatchy" as the active theme (the ba
 
 ## Roadmap
 
-- [x] v1.0 — Palette + font sync, header badge, contrast guard
-- [ ] v1.1 — Hyprland border style injection (gradient borders, radius from `hyprland.conf`)
-- [ ] v1.2 — Window gap / shadow density from `looknfeel.conf`
-- [ ] v1.3 — **Omarchy hook integration** — install a `theme-set` hook in `~/.config/omarchy/hooks/` to trigger instant dashboard refresh instead of 3s polling
-- [ ] v2.0 — **TUI skin bridge** — extend to Hermes TUI (`/skin` command) so terminal and web match
-- [ ] v2.1 — Wallpaper blur/accent extraction for `warmGlow` tuning
-
----
-
-## Architecture Deep Dive
-
-### Omarchy Hook Integration (Future)
-
-Omarchy's `omarchy-theme-set` script calls `omarchy-hook theme-set "$THEME_NAME"` after applying a theme. By dropping a hook script at `~/.config/omarchy/hooks/theme-set`, Omatchy could:
-1. Receive the theme change event instantly (zero latency)
-2. Call the plugin API to force an immediate refresh
-3. Eliminate the 3-second polling window entirely
-
-This would make the sync feel truly instantaneous across the entire desktop.
-
-### TUI Skin Bridge (Future)
-
-Hermes TUI uses a separate skin system (`~/.hermes/skins/*.yaml`) with semantic colors like `banner_border`, `banner_title`, `ui_accent`, etc. A v2.0 Omatchy could:
-1. Map the Omarchy palette to TUI skin colors
-2. Generate `~/.hermes/skins/omatchy-tui.yaml` dynamically
-3. Call `set_active_skin()` via the Hermes CLI API or write to `config.yaml`
-4. Trigger a TUI skin reload so terminal and dashboard always match
+- [x] v1.0 — Palette + font sync, header badge, contrast guard, theme-gate idling
+- [ ] v1.1 — Parse non-`colors.toml` sources (`neovim.lua`, `waybar.css`, `btop.theme`) as color fallbacks
+- [ ] v1.2 — Hyprland border style injection (gradient borders, radius)
+- [ ] v1.3 — Omarchy `theme-set` hook for instant push (zero-polling) sync
+- [ ] v2.0 — TUI skin bridge (`/skin` command) so terminal and web match
 
 ---
 
