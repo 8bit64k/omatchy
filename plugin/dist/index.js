@@ -183,7 +183,7 @@
         title: tooltip,
         style: {
           display: "inline-flex",
-          height: "1.5rem",
+          alignItems: "center",
           opacity: installed ? 0.6 : 0.3,
           transition: "opacity 300ms",
           cursor: "default",
