@@ -15,6 +15,8 @@ Built for the **Nous Research Hermes Dashboard Pop-Up Hackathon** to showcase bo
 
 > **The pitch:** Widescreen Linux desktop. Six apps. One theme. Change it in Omarchy — watch every window (including Hermes Dashboard) shift in real-time. That's Omatchy.
 
+See [`assets/storyboard.md`](assets/storyboard.md) for the full shot list and [`assets/record-demo.sh`](assets/record-demo.sh) for a one-command screen recorder.
+
 ---
 
 ## What It Does
@@ -234,8 +236,30 @@ The tradeoff: the theme picker still shows "Omatchy" as the active theme (the ba
 - [x] v1.0 — Palette + font sync, header badge, contrast guard
 - [ ] v1.1 — Hyprland border style injection (gradient borders, radius from `hyprland.conf`)
 - [ ] v1.2 — Window gap / shadow density from `looknfeel.conf`
+- [ ] v1.3 — **Omarchy hook integration** — install a `theme-set` hook in `~/.config/omarchy/hooks/` to trigger instant dashboard refresh instead of 3s polling
 - [ ] v2.0 — **TUI skin bridge** — extend to Hermes TUI (`/skin` command) so terminal and web match
 - [ ] v2.1 — Wallpaper blur/accent extraction for `warmGlow` tuning
+
+---
+
+## Architecture Deep Dive
+
+### Omarchy Hook Integration (Future)
+
+Omarchy's `omarchy-theme-set` script calls `omarchy-hook theme-set "$THEME_NAME"` after applying a theme. By dropping a hook script at `~/.config/omarchy/hooks/theme-set`, Omatchy could:
+1. Receive the theme change event instantly (zero latency)
+2. Call the plugin API to force an immediate refresh
+3. Eliminate the 3-second polling window entirely
+
+This would make the sync feel truly instantaneous across the entire desktop.
+
+### TUI Skin Bridge (Future)
+
+Hermes TUI uses a separate skin system (`~/.hermes/skins/*.yaml`) with semantic colors like `banner_border`, `banner_title`, `ui_accent`, etc. A v2.0 Omatchy could:
+1. Map the Omarchy palette to TUI skin colors
+2. Generate `~/.hermes/skins/omatchy-tui.yaml` dynamically
+3. Call `set_active_skin()` via the Hermes CLI API or write to `config.yaml`
+4. Trigger a TUI skin reload so terminal and dashboard always match
 
 ---
 
