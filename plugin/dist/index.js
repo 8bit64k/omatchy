@@ -174,17 +174,16 @@
         ? "Omatchy bridge active — " + pretty
         : "Omatchy: Omarchy not detected";
 
-    // Render a plain inline-flex wrapper so we match the surrounding
-    // footer layout.  The SVG uses currentColor so it inherits the
-    // same muted sidebar-icon colour as ThemeSwitcher / LanguageSwitcher.
+    // Neutral inline-flex peer: let the parent's `items-center` and `gap-2`
+    // handle alignment.  We match the ThemeSwitcher button height (1.5rem)
+    // so our optical center lines up with the adjacent text+icons.
     return React.createElement(
       "span",
       {
         title: tooltip,
         style: {
           display: "inline-flex",
-          alignItems: "center",
-          justifyContent: "center",
+          height: "1.5rem",
           opacity: installed ? 0.6 : 0.3,
           transition: "opacity 300ms",
           cursor: "default",
