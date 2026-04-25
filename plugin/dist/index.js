@@ -37,6 +37,12 @@
 
   function applyThemeVars(def) {
     if (typeof document === "undefined") return;
+    const active =
+      typeof window !== "undefined" && window.localStorage
+        ? window.localStorage.getItem("hermes-dashboard-theme")
+        : null;
+    if (active && active !== "omatchy") return;
+
     const root = document.documentElement;
     const p = def.palette;
     const vars = {};
@@ -222,6 +228,11 @@
 
     useEffect(function () {
       if (!status || !status.installed) return;
+      const active =
+        typeof window !== "undefined" && window.localStorage
+          ? window.localStorage.getItem("hermes-dashboard-theme")
+          : null;
+      if (active && active !== "omatchy") return;
       const current = status.omarchyTheme;
 
       // Show toast when theme actually changes (not on initial load)
