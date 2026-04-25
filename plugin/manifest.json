@@ -1,0 +1,15 @@
+{
+  "name": "omatchy",
+  "label": "Omatchy",
+  "description": "Syncs Hermes dashboard theme with the current Omarchy desktop theme",
+  "icon": "Link",
+  "version": "1.0.0",
+  "tab": {
+    "path": "/omatchy",
+    "position": "end",
+    "hidden": true
+  },
+  "slots": ["header-right"],
+  "entry": "dist/index.js",
+  "api": "plugin_api.py"
+}
