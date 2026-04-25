@@ -2,7 +2,7 @@
  * Omatchy — Omarchy ↔ Hermes Dashboard Theme Bridge
  *
  * Registers two slots:
- *   - header-left:  Minimal desktop icon (hover shows status)
+ *   - header-right: Minimal desktop icon (footer bar, inherits sidebar colour)
  *   - overlay:      Toast notification on theme change
  *
  * Polls /status every 3s. Injects CSS variables into :root on every update.
@@ -158,7 +158,7 @@
   }
 
   // -----------------------------------------------------------------------
-  // Slot 1: header-left — minimal desktop icon
+  // Slot 1: header-right — minimal desktop icon (footer bar)
   // -----------------------------------------------------------------------
 
   function OmatchyIcon() {
@@ -174,6 +174,9 @@
         ? "Omatchy bridge active — " + pretty
         : "Omatchy: Omarchy not detected";
 
+    // Neutral inline-flex peer: let the parent's `items-center` and `gap-2`
+    // handle alignment.  We match the ThemeSwitcher button height (1.5rem)
+    // so our optical center lines up with the adjacent text+icons.
     return React.createElement(
       "span",
       {
@@ -181,27 +184,22 @@
         style: {
           display: "inline-flex",
           alignItems: "center",
-          justifyContent: "center",
-          width: "1.5rem",
-          height: "1.5rem",
-          opacity: installed ? 0.7 : 0.3,
+          opacity: installed ? 0.6 : 0.3,
           transition: "opacity 300ms",
           cursor: "default",
         },
       },
-      // Small desktop monitor SVG
       React.createElement(
         "svg",
         {
-          width: "16",
-          height: "16",
+          width: "14",
+          height: "14",
           viewBox: "0 0 24 24",
           fill: "none",
           stroke: "currentColor",
           strokeWidth: "2",
           strokeLinecap: "round",
           strokeLinejoin: "round",
-          style: { color: installed ? "var(--color-primary, #89b4fa)" : "var(--color-muted-foreground, #888)" },
         },
         React.createElement("rect", { x: "2", y: "3", width: "20", height: "14", rx: "2" }),
         React.createElement("line", { x1: "8", y1: "21", x2: "16", y2: "21" }),
@@ -327,8 +325,8 @@
 
   const NAME = "omatchy";
   PLUGINS.register(NAME, OmatchyPage);
-  PLUGINS.registerSlot(NAME, "header-left", OmatchyIcon);
+  PLUGINS.registerSlot(NAME, "header-right", OmatchyIcon);
   PLUGINS.registerSlot(NAME, "overlay", OmatchyToast);
 
-  console.log("[Omatchy] Plugin registered (icon + toast)");
+  console.log("[Omatchy] Plugin registered (header-right icon + toast)");
 })();

@@ -4,7 +4,17 @@ set -euo pipefail
 echo "🔗 Omatchy Installer"
 echo "=================="
 
-HERMES_HOME="${HERMES_HOME:-$HOME/.hermes}"
+# Resolve real home (handles Hermes profile isolation where $HOME → ~/.hermes/home)
+_resolve_real_home() {
+  local raw_home="$HOME"
+  if [[ "$raw_home" == */.hermes/home ]]; then
+    echo "${raw_home%/.hermes/home}"
+  else
+    echo "$raw_home"
+  fi
+}
+
+HERMES_HOME="${HERMES_HOME:-$(_resolve_real_home)/.hermes}"
 
 # 1. Theme
 echo "✓ Installing dashboard theme..."
