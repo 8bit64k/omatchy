@@ -243,7 +243,7 @@
         });
         const timer = setTimeout(function () {
           setToast(null);
-        }, 3500);
+        }, 6000);
         return function () {
           clearTimeout(timer);
         };
