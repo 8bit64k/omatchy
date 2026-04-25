@@ -2,7 +2,7 @@
  * Omatchy — Omarchy ↔ Hermes Dashboard Theme Bridge
  *
  * Registers two slots:
- *   - header-left:  Minimal desktop icon (hover shows status)
+ *   - header-right: Minimal desktop icon (footer bar, inherits sidebar colour)
  *   - overlay:      Toast notification on theme change
  *
  * Polls /status every 3s. Injects CSS variables into :root on every update.
@@ -158,7 +158,7 @@
   }
 
   // -----------------------------------------------------------------------
-  // Slot 1: header-left — minimal desktop icon
+  // Slot 1: header-right — minimal desktop icon (footer bar)
   // -----------------------------------------------------------------------
 
   function OmatchyIcon() {
@@ -168,18 +168,15 @@
     const installed = status ? status.installed : false;
     const pretty = prettyTheme(themeLabel);
 
-    // Pull primary color directly from the API payload so we don't rely on
-    // CSS variable resolution timing (which can lag behind React render).
-    const primaryHex = status && status.colorOverrides && status.colorOverrides.primary
-      ? status.colorOverrides.primary
-      : "#89b4fa";
-
     const tooltip = error
       ? "Omatchy: " + error
       : installed
         ? "Omatchy bridge active — " + pretty
         : "Omatchy: Omarchy not detected";
 
+    // Render a plain inline-flex wrapper so we match the surrounding
+    // footer layout.  The SVG uses currentColor so it inherits the
+    // same muted sidebar-icon colour as ThemeSwitcher / LanguageSwitcher.
     return React.createElement(
       "span",
       {
@@ -188,22 +185,19 @@
           display: "inline-flex",
           alignItems: "center",
           justifyContent: "center",
-          width: "1.5rem",
-          height: "1.5rem",
-          opacity: installed ? 0.9 : 0.3,
+          opacity: installed ? 0.6 : 0.3,
           transition: "opacity 300ms",
           cursor: "default",
         },
       },
-      // Small desktop monitor SVG — stroke is the Omarchy accent color
       React.createElement(
         "svg",
         {
-          width: "16",
-          height: "16",
+          width: "14",
+          height: "14",
           viewBox: "0 0 24 24",
           fill: "none",
-          stroke: installed ? primaryHex : "#888",
+          stroke: "currentColor",
           strokeWidth: "2",
           strokeLinecap: "round",
           strokeLinejoin: "round",
@@ -332,8 +326,8 @@
 
   const NAME = "omatchy";
   PLUGINS.register(NAME, OmatchyPage);
-  PLUGINS.registerSlot(NAME, "header-left", OmatchyIcon);
+  PLUGINS.registerSlot(NAME, "header-right", OmatchyIcon);
   PLUGINS.registerSlot(NAME, "overlay", OmatchyToast);
 
-  console.log("[Omatchy] Plugin registered (icon + toast)");
+  console.log("[Omatchy] Plugin registered (header-right icon + toast)");
 })();

@@ -9,7 +9,7 @@
     "position": "end",
     "hidden": true
   },
-  "slots": ["header-left", "overlay"],
+  "slots": ["header-right", "overlay"],
   "entry": "dist/index.js",
   "api": "plugin_api.py"
 }
