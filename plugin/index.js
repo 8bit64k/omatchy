@@ -270,6 +270,7 @@
           fontFamily: "var(--theme-font-mono, monospace)",
           fontSize: "0.75rem",
           letterSpacing: "0.04em",
+          textTransform: "none",
           backdropFilter: "blur(8px)",
           WebkitBackdropFilter: "blur(8px)",
           animation: "omatchy-toast-in 250ms ease-out forwards",
