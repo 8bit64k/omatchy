@@ -1,6 +1,8 @@
 name: omatchy
 label: "Omatchy"
 description: "Neutral base for Omarchy theme bridge"
+assets:
+  bg: none  # suppress default dashboard background texture for clean solid fills
 palette:
   background:
     hex: "#0a0a0a"
