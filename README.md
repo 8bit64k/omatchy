@@ -10,10 +10,11 @@ Built for the **Nous Research Hermes Dashboard Pop-Up Hackathon** to showcase bo
 
 ## Demo
 
-<!-- Replace with your actual video link -->
-[![Omatchy Demo](assets/title-card.png)](https://youtu.be/REPLACE_ME)
+![Omatchy live theme sync demo](assets/omatchy-highlight.gif)
 
-> 🎬 **Demo video coming soon.** See [`assets/storyboard.md`](assets/storyboard.md) for the shot list and [`assets/record-demo.sh`](assets/record-demo.sh) if you want to record your own.
+**[▶️ Full demo video on YouTube](https://youtu.be/REPLACE_ME)** — 72 seconds, with audio.
+
+> See [`assets/storyboard.md`](assets/storyboard.md) for the shot list and [`assets/record-demo.sh`](assets/record-demo.sh) if you want to record your own.
 
 ---
 
