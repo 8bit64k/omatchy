@@ -317,12 +317,12 @@
   }
 
   // -----------------------------------------------------------------------
-  // Global toast animation keyframes (inject once)
+  // Global toast animation keyframes + mobile overlay fix (inject once)
   // -----------------------------------------------------------------------
 
-  (function injectKeyframes() {
+  (function injectGlobalStyles() {
     if (typeof document === "undefined") return;
-    const id = "omatchy-toast-keyframes";
+    const id = "omatchy-global-styles";
     if (document.getElementById(id)) return;
     const style = document.createElement("style");
     style.id = id;
@@ -330,6 +330,10 @@
       "@keyframes omatchy-toast-in {" +
       "  from { opacity: 0; transform: translateY(-8px); }" +
       "  to   { opacity: 1; transform: translateY(0); }" +
+      "}" +
+      /* Override hardcoded black mobile overlay so light themes stay clean */ 
+      "[class*=\"bg-black/60\"] {" +
+      "  background-color: color-mix(in srgb, var(--background-base) 60%, transparent) !important;" +
       "}";
     document.head.appendChild(style);
   })();
