@@ -2,7 +2,7 @@
 
 > *Your Omarchy desktop theme, alive in Hermes.*
 
-**Omatchy** ("o-match-ee") is a Hermes Agent dashboard plugin + theme pair that dynamically mirrors your [Omarchy](https://github.com/omarchy/) Linux desktop theme into the Hermes web dashboard. Change your Omarchy theme — the dashboard updates within 3 seconds. No reload. No manual config. It just follows.
+**Omatchy** ("o-match-ee") is a Hermes Agent dashboard plugin + theme pair that dynamically matches Hermes web dashboard theme to your [Omarchy](https://github.com/omarchy/) Linux desktop theme. Change your Omarchy theme — the dashboard matches within 3 seconds. No reload. No manual config. It just matches reliably and without fuss.
 
 Built for the **Nous Research Hermes Dashboard Pop-Up Hackathon** to showcase both **custom themes** and **dashboard plugins** working in tandem.
 
