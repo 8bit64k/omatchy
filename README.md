@@ -244,4 +244,4 @@ MIT — see [LICENSE](LICENSE).
 
 ---
 
-*Built with ⚡ by [8bit64k](https://github.com/8bit64k) for the Nous Research Hermes Dashboard Pop-Up Hackathon.*
+*Built with ⚡ by [8bit64k](https://github.com/8bit64k) for the Nous Research Hermes Dashboard Pop-Up Hackathon. This is a personal development project and learning experience for me so feedback is welcome.*
