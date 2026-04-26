@@ -17,6 +17,12 @@ layout:
   radius: "0.5rem"
   density: comfortable
 layoutVariant: standard
+customCSS: |
+  /* Override hardcoded black overlay on mobile sidebar flyout
+     so light themes don't look muddy when the sidebar slides out. */
+  [class*="bg-black/60"] {
+    background-color: color-mix(in srgb, var(--background-base) 60%, transparent) !important;
+  }
 typography:
   fontSans: 'ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif'
   fontMono: 'ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace'
