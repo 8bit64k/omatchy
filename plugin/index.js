@@ -238,7 +238,7 @@
       // Show toast when theme actually changes (not on initial load)
       if (prevTheme && prevTheme !== current) {
         setToast({
-          message: "Synced to " + prettyTheme(current),
+          message: "Matched to " + prettyTheme(current),
           type: "success",
         });
         const timer = setTimeout(function () {
