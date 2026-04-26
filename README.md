@@ -1,4 +1,4 @@
-# Omatchy 🔗
+# Omatchy 🖥️
 
 > *Your Omarchy desktop theme, alive in Hermes.*
 
@@ -12,7 +12,7 @@ Built for the **Nous Research Hermes Dashboard Pop-Up Hackathon** to showcase bo
 
 ![Omatchy live theme sync demo](assets/omatchy-highlight.gif)
 
-**[▶️ Full demo video on YouTube](https://youtu.be/REPLACE_ME)** — 72 seconds, with audio.
+**[🖥️ Full demo video on YouTube](https://youtu.be/hz6FOvBrvGw)** — 72 seconds, with audio.
 
 > See [`assets/storyboard.md`](assets/storyboard.md) for the shot list and [`assets/record-demo.sh`](assets/record-demo.sh) if you want to record your own.
 
