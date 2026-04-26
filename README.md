@@ -88,12 +88,12 @@ hermes dashboard
 │  │  • Skips React re-render if theme unchanged              │   │
 │  └──────────────────────────────────────────────────────────┘   │
 │                           │                                     │
-│                           ▼ CSS vars                             │
+│                           ▼ CSS vars                            │
 │  ┌──────────────────────────────────────────────────────────┐   │
 │  │  Dashboard Chrome  (ThemeProvider + :root overrides)     │   │
 │  │  • --background, --midground, --foreground               │   │
 │  │  • --color-primary, --color-accent, --color-ring         │   │
-│  │  • --theme-font-sans, --theme-font-mono                 │   │
+│  │  • --theme-font-sans, --theme-font-mono                  │   │
 │  └──────────────────────────────────────────────────────────┘   │
 └─────────────────────────────────────────────────────────────────┘
 ```
