@@ -101,7 +101,8 @@ def get_current_omarchy_theme() -> tuple[str, Optional[Dict[str, Any]]]:
         candidate = d / "colors.toml" if d.is_dir() else d
         if candidate.is_file() and candidate.name == "colors.toml":
             try:
-                colors = tomllib.loads(candidate.read_text())
+                parsed = tomllib.loads(candidate.read_text())
+                colors = parsed.get("colors", parsed)
                 return theme_name, colors
             except Exception:
                 continue
