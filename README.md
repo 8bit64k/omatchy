@@ -137,8 +137,13 @@ if abs(_luminance(bg) - _luminance(midground)) < 0.25:
 ```
 
 This means **custom Omarchy themes work out of the box** — no pre-registration, no manual color tuning.
-
 ---
+
+Tested with the standard Omarchy themes: catppuccin, catppuccin-latte, ethereal, everforest, flexoki-light, gruvbox, hackerman, kanagawa, lumon, matte-black, miasma, nord, osaka-jade, retro-82, ristretto, rose-pine, tokyo-night, vanta black, and white.
+
+Also tested with these Omarchy community themes: catppuccin-dark, mechonoona, space-monkey, black_arch, blackturq, cpunk, demon, event-horizon, greek-noir, and more.
+
+
 
 ## Plugin API
 
