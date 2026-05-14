@@ -33,6 +33,20 @@ Built for the **Nous Research Hermes Dashboard Pop-Up Hackathon** to showcase bo
 
 ## Installation
 
+```
+Dashboard Plugins Tab (Recommended)
+Open the Hermes dashboard, navigate to the Plugins tab, and use the Install from GitHub / Git URL field. Enter:
+
+owner/repo shorthand (e.g. 8bit64k/omatchy)
+Or a full https:// or git@ clone URL
+Check Enable after install, then click Install.
+
+After Install
+Hard-refresh your browser (Ctrl+Shift+R or Cmd+Shift+R) to clear cached JS
+
+Select "Omatchy" from the dashboard theme picker
+```
+
 ```bash
 # 1. Clone
 git clone https://github.com/8bit64k/omatchy.git
